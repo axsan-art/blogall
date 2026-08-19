@@ -1,3 +1,5 @@
+import SearchPosts from "@/components/SearchPosts";
+
 export default function ExplorarPage() {
   return (
     <main className="min-h-screen p-8">
@@ -8,6 +10,7 @@ export default function ExplorarPage() {
       <p className="mt-4 text-slate-600">
         Aquí podrás encontrar publicaciones de diferentes categorías.
       </p>
+      <SearchPosts />
     </main>
   );
 }

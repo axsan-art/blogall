@@ -1,3 +1,4 @@
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -11,9 +12,11 @@ export default function Home() {
       El blog donde puedes expresarte 
      </p>
 
-     <button className="bg-orange-600 hover:bg-orange-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors shadow-md">
+     <Link
+      href="/explorar"
+      className="bg-orange-600 hover:bg-orange-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors shadow-md">
       Explorar Temas
-     </button>
+    </Link>
 
     </main>
   )
