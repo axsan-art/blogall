@@ -1,4 +1,5 @@
 import SearchPosts from "@/components/SearchPosts";
+import UnsplashImages from "@/components/UnsplashImages";
 
 export default function ExplorarPage() {
   return (
@@ -11,6 +12,7 @@ export default function ExplorarPage() {
         Aquí podrás encontrar publicaciones de diferentes categorías.
       </p>
       <SearchPosts />
+      <UnsplashImages />
     </main>
   );
 }
