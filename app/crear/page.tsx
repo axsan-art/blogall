@@ -12,28 +12,77 @@ type Categoria = {
 export default function CrearPage() {
   const router = useRouter();
 
+  const [rol, setRol] = useState("");
+  const [categorias, setCategorias] = useState<Categoria[]>([]);
   const [titulo, setTitulo] = useState("");
   const [contenido, setContenido] = useState("");
   const [categoriaId, setCategoriaId] = useState("");
-  const [categorias, setCategorias] = useState<Categoria[]>([]);
   const [mensaje, setMensaje] = useState("");
 
   useEffect(() => {
-    async function cargarCategorias() {
-      const { data, error } = await supabase
-        .from("categorias")
-        .select("id, nombre");
+    async function cargarDatos() {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
 
-      if (error) {
-        console.error("Error al cargar categorías:", error);
+      if (!user) {
+        router.push("/login");
         return;
       }
 
-      setCategorias(data || []);
+      const { data: perfil, error: errorPerfil } = await supabase
+        .from("profiles")
+        .select("rol")
+        .eq("id", user.id)
+        .single();
+
+      if (errorPerfil) {
+        console.error("Error al obtener perfil:", errorPerfil);
+        return;
+      }
+
+      setRol(perfil.rol);
+
+      const { data: datosCategorias, error: errorCategorias } =
+        await supabase
+          .from("categorias")
+          .select("id, nombre");
+
+      if (errorCategorias) {
+        console.error("Error al cargar categorías:", errorCategorias);
+        return;
+      }
+
+      setCategorias(datosCategorias || []);
     }
 
-    cargarCategorias();
-  }, []);
+    cargarDatos();
+  }, [router]);
+
+  async function convertirseEnAutor() {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) {
+      router.push("/login");
+      return;
+    }
+
+    const { error } = await supabase
+      .from("profiles")
+      .update({ rol: "autor" })
+      .eq("id", user.id);
+
+    if (error) {
+      console.error("Error al convertirse en autor:", error);
+      setMensaje("No se pudo realizar el cambio.");
+      return;
+    }
+
+    setRol("autor");
+    setMensaje("Ahora eres Autor. Ya puedes crear publicaciones.");
+  }
 
   async function crearPublicacion(e: React.FormEvent) {
     e.preventDefault();
@@ -65,6 +114,37 @@ export default function CrearPage() {
     setTitulo("");
     setContenido("");
     setCategoriaId("");
+  }
+
+  if (rol === "lector") {
+    return (
+      <main className="min-h-screen p-8">
+        <div className="max-w-2xl mx-auto text-center">
+          <h1 className="text-4xl font-bold text-slate-800">
+            Hacer mi propia publicación
+          </h1>
+
+          <p className="mt-6 text-slate-600">
+            Al hacer tu primera publicación te convertirás en Autor,
+            por lo que podrás hacer más publicaciones, editar y eliminar
+            tus publicaciones.
+          </p>
+
+          <button
+            onClick={convertirseEnAutor}
+            className="mt-6 bg-orange-600 hover:bg-orange-700 text-white font-semibold px-6 py-3 rounded-lg"
+          >
+            Hacer mi propia publicación
+          </button>
+
+          {mensaje && (
+            <p className="mt-4 text-slate-600">
+              {mensaje}
+            </p>
+          )}
+        </div>
+      </main>
+    );
   }
 
   return (
