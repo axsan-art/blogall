@@ -1,27 +1,35 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
 
-const publicaciones = [
-  {
-    id: 1,
-    titulo: "Los mejores videojuegos de 2026",
-    categoria: "Videojuegos",
-  },
-  {
-    id: 2,
-    titulo: "Introducción a la inteligencia artificial",
-    categoria: "Tecnología",
-  },
-  {
-    id: 3,
-    titulo: "Películas que debes conocer",
-    categoria: "Entretenimiento",
-  },
-];
+type Publicacion = {
+  id: number;
+  titulo: string;
+  contenido: string;
+  categoria_id: number;
+};
 
 export default function SearchPosts() {
   const [busqueda, setBusqueda] = useState("");
+  const [publicaciones, setPublicaciones] = useState<Publicacion[]>([]);
+
+  useEffect(() => {
+    async function cargarPublicaciones() {
+      const { data, error } = await supabase
+        .from("publicaciones")
+        .select("id, titulo, contenido, categoria_id");
+
+      if (error) {
+        console.error("Error al cargar publicaciones:", error);
+        return;
+      }
+
+      setPublicaciones(data || []);
+    }
+
+    cargarPublicaciones();
+  }, []);
 
   const publicacionesFiltradas = publicaciones.filter((publicacion) =>
     publicacion.titulo.toLowerCase().includes(busqueda.toLowerCase())
@@ -47,8 +55,12 @@ export default function SearchPosts() {
               {publicacion.titulo}
             </h2>
 
+            <p className="mt-2 text-slate-600">
+              {publicacion.contenido}
+            </p>
+
             <p className="mt-2 text-orange-600">
-              Categoría: {publicacion.categoria}
+              Categoría: {publicacion.categoria_id}
             </p>
           </article>
         ))}
