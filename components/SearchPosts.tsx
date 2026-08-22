@@ -8,6 +8,9 @@ type Publicacion = {
   titulo: string;
   contenido: string;
   categoria_id: number;
+  categorias: {
+  nombre: string;
+}[];
 };
 
 export default function SearchPosts() {
@@ -18,7 +21,15 @@ export default function SearchPosts() {
     async function cargarPublicaciones() {
       const { data, error } = await supabase
         .from("publicaciones")
-        .select("id, titulo, contenido, categoria_id");
+        .select(`
+          id,
+          titulo,
+          contenido,
+          categoria_id,
+          categorias (
+            nombre
+          )
+        `);
 
       if (error) {
         console.error("Error al cargar publicaciones:", error);
@@ -60,7 +71,7 @@ export default function SearchPosts() {
             </p>
 
             <p className="mt-2 text-orange-600">
-              Categoría: {publicacion.categoria_id}
+              Categoría: {publicacion.categorias[0]?.nombre}
             </p>
           </article>
         ))}
