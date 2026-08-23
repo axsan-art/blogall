@@ -47,18 +47,42 @@ export default function Navbar({ nombre }: NavbarProps) {
         </h1>
 
         <div className="flex gap-6">
-          <a href="/">Inicio</a>
-          <a href="/explorar">Explorar</a>
+          <a
+            href="/"
+            className="transition-transform duration-200 hover:scale-110"
+          >
+            Inicio
+          </a>
+
+          <a
+            href="/explorar"
+            className="transition-transform duration-200 hover:scale-110"
+          >
+            Explorar
+          </a>
 
           {sesionActiva ? (
-            <button className="cursor-pointer"
-            onClick={cerrarSesion}>
+            <button
+              className="cursor-pointer transition-transform duration-200 hover:scale-110"
+              onClick={cerrarSesion}
+            >
               Cerrar sesión
             </button>
           ) : (
             <>
-              <a href="/login">Iniciar sesión</a>
-              <a href="/register">Registrarse</a>
+              <a
+                href="/login"
+                className="transition-transform duration-200 hover:scale-110"
+              >
+                Iniciar sesión
+              </a>
+
+              <a
+                href="/register"
+                className="transition-transform duration-200 hover:scale-110"
+              >
+                Registrarse
+              </a>
             </>
           )}
         </div>
