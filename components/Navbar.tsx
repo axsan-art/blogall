@@ -49,21 +49,21 @@ export default function Navbar({ nombre }: NavbarProps) {
         <div className="flex gap-6">
           <a
             href="/"
-            className="transition-transform duration-200 hover:scale-110"
+            className="cursor-pointer transition-colors duration-200 hover:text-orange-300 hover:underline hover:underline-offset-4"
           >
             Inicio
           </a>
 
           <a
             href="/explorar"
-            className="transition-transform duration-200 hover:scale-110"
+            className="cursor-pointer transition-colors duration-200 hover:text-orange-300 hover:underline hover:underline-offset-4"
           >
             Explorar
           </a>
 
           {sesionActiva ? (
             <button
-              className="cursor-pointer transition-transform duration-200 hover:scale-110"
+              className="cursor-pointer transition-colors duration-200 hover:text-orange-300 hover:underline hover:underline-offset-4"
               onClick={cerrarSesion}
             >
               Cerrar sesión
@@ -72,14 +72,14 @@ export default function Navbar({ nombre }: NavbarProps) {
             <>
               <a
                 href="/login"
-                className="transition-transform duration-200 hover:scale-110"
+                className="cursor-pointer transition-colors duration-200 hover:text-orange-300 hover:underline hover:underline-offset-4"
               >
                 Iniciar sesión
               </a>
 
               <a
                 href="/register"
-                className="transition-transform duration-200 hover:scale-110"
+                className="cursor-pointer transition-colors duration-200 hover:text-orange-300 hover:underline hover:underline-offset-4"
               >
                 Registrarse
               </a>
@@ -90,3 +90,6 @@ export default function Navbar({ nombre }: NavbarProps) {
     </nav>
   );
 }
+
+
+

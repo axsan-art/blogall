@@ -25,45 +25,52 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="min-h-screen p-8">
+    <main className="min-h-screen bg-gradient-to-r from-orange-100 via-amber-50 to-yellow-100 px-6 py-12">
       <div className="max-w-md mx-auto">
-        <h1 className="text-3xl font-bold text-slate-800">
-          Iniciar sesión
-        </h1>
-
-        <form onSubmit={iniciarSesion} className="mt-6 space-y-4">
-          <input
-            type="email"
-            placeholder="Correo electrónico"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full border rounded px-4 py-2"
-            required
-          />
-
-          <input
-            type="password"
-            placeholder="Contraseña"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full border rounded px-4 py-2"
-            required
-          />
-
-          <button
-            type="submit"
-            className="bg-slate-900 text-white px-4 py-2 rounded"
-          >
+        <div className="bg-white rounded-2xl shadow-md p-8">
+          <h1 className="text-3xl font-bold text-slate-800">
             Iniciar sesión
-          </button>
-        </form>
+          </h1>
 
-        {mensaje && (
-          <p className="mt-4 text-slate-600">
-            {mensaje}
+          <p className="mt-3 text-slate-600">
+            Ingresa a tu cuenta para continuar en BlogAll.
           </p>
-        )}
+
+          <form onSubmit={iniciarSesion} className="mt-6 space-y-5">
+            <input
+              type="email"
+              placeholder="Correo electrónico"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-400"
+              required
+            />
+
+            <input
+              type="password"
+              placeholder="Contraseña"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-400"
+              required
+            />
+
+            <button
+              type="submit"
+              className="bg-orange-600 hover:bg-orange-700 hover:scale-105 transition-transform duration-200 text-white font-semibold px-6 py-3 rounded-lg"
+            >
+              Iniciar sesión
+            </button>
+          </form>
+
+          {mensaje && (
+            <p className="mt-4 text-slate-700">
+              {mensaje}
+            </p>
+          )}
+        </div>
       </div>
     </main>
   );
 }
+

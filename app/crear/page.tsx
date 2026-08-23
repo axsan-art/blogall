@@ -118,90 +118,99 @@ export default function CrearPage() {
 
   if (rol === "lector") {
     return (
-      <main className="min-h-screen p-8">
-        <div className="max-w-2xl mx-auto text-center">
-          <h1 className="text-4xl font-bold text-slate-800">
-            Hacer mi propia publicación
-          </h1>
+      <main className="min-h-screen bg-gradient-to-r from-orange-100 via-amber-50 to-yellow-100 px-6 py-12">
+        <div className="max-w-2xl mx-auto">
+          <div className="bg-white rounded-2xl shadow-md p-8 text-center">
+            <h1 className="text-4xl font-bold text-slate-800">
+              Hacer mi propia publicación
+            </h1>
 
-          <p className="mt-6 text-slate-600">
-            Al hacer tu primera publicación te convertirás en Autor,
-            por lo que podrás hacer más publicaciones, editar y eliminar
-            tus publicaciones.
-          </p>
-
-          <button
-            onClick={convertirseEnAutor}
-            className="mt-6 bg-orange-600 hover:bg-orange-700 text-white font-semibold px-6 py-3 rounded-lg"
-          >
-            Hacer mi propia publicación
-          </button>
-
-          {mensaje && (
-            <p className="mt-4 text-slate-600">
-              {mensaje}
+            <p className="mt-6 text-slate-600 leading-relaxed">
+              Al hacer tu primera publicación te convertirás en Autor,
+              por lo que podrás hacer más publicaciones, editar y eliminar
+              tus publicaciones.
             </p>
-          )}
+
+            <button
+              onClick={convertirseEnAutor}
+              className="mt-6 bg-orange-600 hover:bg-orange-700 hover:scale-105 transition-transform duration-200 text-white font-semibold px-6 py-3 rounded-lg"
+            >
+              Hacer mi propia publicación
+            </button>
+
+            {mensaje && (
+              <p className="mt-4 text-slate-700">
+                {mensaje}
+              </p>
+            )}
+          </div>
         </div>
       </main>
     );
   }
 
   return (
-    <main className="min-h-screen p-8">
+    <main className="min-h-screen bg-gradient-to-r from-orange-100 via-amber-50 to-yellow-100 px-6 py-12">
       <div className="max-w-2xl mx-auto">
-        <h1 className="text-4xl font-bold text-slate-800">
-          Crear publicación
-        </h1>
+        <div className="bg-white rounded-2xl shadow-md p-8">
+          <h1 className="text-4xl font-bold text-slate-800">
+            Crear publicación
+          </h1>
 
-        <form onSubmit={crearPublicacion} className="mt-8 space-y-5">
-          <input
-            type="text"
-            placeholder="Título"
-            value={titulo}
-            onChange={(e) => setTitulo(e.target.value)}
-            className="w-full rounded-lg border border-slate-300 px-4 py-3"
-            required
-          />
-
-          <textarea
-            placeholder="Contenido"
-            value={contenido}
-            onChange={(e) => setContenido(e.target.value)}
-            className="w-full rounded-lg border border-slate-300 px-4 py-3"
-            rows={6}
-            required
-          />
-
-          <select
-            value={categoriaId}
-            onChange={(e) => setCategoriaId(e.target.value)}
-            className="w-full rounded-lg border border-orange-300 bg-white px-4 py-3 text-slate-800"
-            required
-          >
-            <option value="">Selecciona una categoría</option>
-
-            {categorias.map((categoria) => (
-              <option key={categoria.id} value={categoria.id}>
-                {categoria.nombre}
-              </option>
-            ))}
-          </select>
-
-          <button
-            type="submit"
-            className="bg-orange-600 hover:bg-orange-700 text-white font-semibold px-6 py-3 rounded-lg"
-          >
-            Publicar
-          </button>
-        </form>
-
-        {mensaje && (
-          <p className="mt-4 text-slate-600">
-            {mensaje}
+          <p className="mt-3 text-slate-600">
+            Comparte una publicación con la comunidad de BlogAll.
           </p>
-        )}
+
+          <form onSubmit={crearPublicacion} className="mt-8 space-y-5">
+            <input
+              type="text"
+              placeholder="Título"
+              value={titulo}
+              onChange={(e) => setTitulo(e.target.value)}
+              className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-400"
+              required
+            />
+
+            <textarea
+              placeholder="Contenido"
+              value={contenido}
+              onChange={(e) => setContenido(e.target.value)}
+              className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-400"
+              rows={6}
+              required
+            />
+
+            <select
+              value={categoriaId}
+              onChange={(e) => setCategoriaId(e.target.value)}
+              className="w-full rounded-lg border border-orange-300 bg-white px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-400"
+              required
+            >
+              <option value="">Selecciona una categoría</option>
+
+              {categorias.map((categoria) => (
+                <option key={categoria.id} value={categoria.id}>
+                  {categoria.nombre}
+                </option>
+              ))}
+            </select>
+
+            <button
+              type="submit"
+              className="bg-orange-600 hover:bg-orange-700 hover:scale-105 transition-transform duration-200 text-white font-semibold px-6 py-3 rounded-lg"
+            >
+              Publicar
+            </button>
+          </form>
+
+          {mensaje && (
+            <p className="mt-4 text-slate-700">
+              {mensaje}
+            </p>
+          )}
+        </div>
       </div>
     </main>
   );
 }
+

@@ -103,7 +103,7 @@ export default function SearchPosts() {
         placeholder="Buscar publicaciones..."
         value={busqueda}
         onChange={(e) => setBusqueda(e.target.value)}
-        className="w-full rounded-lg border border-slate-300 px-4 py-3"
+        className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-500"
       />
 
       <div className="mt-6 space-y-4">
