@@ -1,23 +1,31 @@
+
 import Link from "next/link";
+import UnsplashImages from "@/components/UnsplashImages";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-r from-orange-300 via-amber-200 to-yellow-100 flex flex-col items-center justify-center gap-6">
+    <main className="min-h-screen bg-gradient-to-r from-orange-300 via-amber-200 to-yellow-100 flex flex-col items-center justify-center gap-6 px-6 py-12">
 
-      <h1 className="text-5xl font-bold text-slate-800">
+      <h1 className="text-5xl font-bold text-slate-800 text-center">
         Bienvenido a <span className="text-orange-600">BlogAll</span>
       </h1>
 
-     <p className="text-lg text-slate-700 max-w-md text-center">
-      El blog donde puedes expresarte 
-     </p>
+      <p className="text-lg text-slate-700 max-w-md text-center">
+        El blog donde puedes expresarte
+      </p>
 
-     <Link
-      href="/explorar"
-      className="bg-orange-600 hover:bg-orange-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors shadow-md">
-      Explorar Temas
-    </Link>
+      <div className="w-full max-w-5xl">
+        <UnsplashImages />
+      </div>
+
+      <Link
+        href="/explorar"
+        className="bg-orange-600 hover:bg-orange-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors shadow-md"
+      >
+        Explorar Temas
+      </Link>
 
     </main>
-  )
+  );
 }
+
