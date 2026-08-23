@@ -20,6 +20,7 @@ export default function EditarPage() {
   const [categoriaId, setCategoriaId] = useState("");
   const [categorias, setCategorias] = useState<Categoria[]>([]);
   const [mensaje, setMensaje] = useState("");
+  const [puedeEditar, setPuedeEditar] = useState(false);
 
   useEffect(() => {
     async function cargarDatos() {
@@ -34,7 +35,7 @@ export default function EditarPage() {
 
       const { data: publicacion, error } = await supabase
         .from("publicaciones")
-        .select("titulo, contenido, categoria_id")
+        .select("titulo, contenido, categoria_id, autor_id")
         .eq("id", id)
         .single();
 
@@ -43,6 +44,13 @@ export default function EditarPage() {
         setMensaje("No se pudo cargar la publicación.");
         return;
       }
+
+      if (publicacion.autor_id !== user.id) {
+        setMensaje("Esta publicación no te pertenece.");
+        return;
+        }
+
+        setPuedeEditar(true);
 
       setTitulo(publicacion.titulo);
       setContenido(publicacion.contenido);
@@ -81,7 +89,7 @@ export default function EditarPage() {
       setMensaje("No se pudo actualizar la publicación.");
       return;
     }
-
+    
     setMensaje("Publicación actualizada correctamente.");
 
     setTimeout(() => {
@@ -96,6 +104,7 @@ export default function EditarPage() {
           Editar publicación
         </h1>
 
+        {puedeEditar && (
         <form onSubmit={guardarCambios} className="mt-8 space-y-5">
           <input
             type="text"
@@ -135,6 +144,7 @@ export default function EditarPage() {
             Guardar cambios
           </button>
         </form>
+        )}
 
         {mensaje && (
           <p className="mt-4 text-slate-600">
