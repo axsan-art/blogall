@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 
 type Publicacion = {
@@ -8,17 +9,29 @@ type Publicacion = {
   titulo: string;
   contenido: string;
   categoria_id: number;
+  autor_id: string;
   categorias: {
-  nombre: string;
-}[];
+    nombre: string;
+  };
 };
 
 export default function SearchPosts() {
+  const router = useRouter();
+
   const [busqueda, setBusqueda] = useState("");
   const [publicaciones, setPublicaciones] = useState<Publicacion[]>([]);
+  const [usuarioId, setUsuarioId] = useState("");
 
   useEffect(() => {
     async function cargarPublicaciones() {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (user) {
+        setUsuarioId(user.id);
+      }
+
       const { data, error } = await supabase
         .from("publicaciones")
         .select(`
@@ -26,6 +39,7 @@ export default function SearchPosts() {
           titulo,
           contenido,
           categoria_id,
+          autor_id,
           categorias (
             nombre
           )
@@ -36,7 +50,14 @@ export default function SearchPosts() {
         return;
       }
 
-      setPublicaciones(data || []);
+      setPublicaciones(
+        data.map((publicacion) => ({
+          ...publicacion,
+          categorias: Array.isArray(publicacion.categorias)
+            ? publicacion.categorias[0]
+            : publicacion.categorias,
+        }))
+      );
     }
 
     cargarPublicaciones();
@@ -48,6 +69,13 @@ export default function SearchPosts() {
 
   return (
     <div className="mt-8">
+      <button
+        onClick={() => router.push("/crear")}
+        className="mb-6 bg-orange-600 hover:bg-orange-700 text-white font-semibold px-6 py-3 rounded-lg"
+      >
+        Crear publicación
+      </button>
+
       <input
         type="text"
         placeholder="Buscar publicaciones..."
@@ -71,8 +99,17 @@ export default function SearchPosts() {
             </p>
 
             <p className="mt-2 text-orange-600">
-              Categoría: {publicacion.categorias[0]?.nombre}
+              Categoría: {publicacion.categorias.nombre}
             </p>
+
+            {publicacion.autor_id === usuarioId && (
+              <button
+                onClick={() => router.push(`/editar/${publicacion.id}`)}
+                className="mt-4 bg-orange-600 hover:bg-orange-700 text-white font-semibold px-4 py-2 rounded-lg"
+              >
+                Editar
+              </button>
+            )}
           </article>
         ))}
       </div>
