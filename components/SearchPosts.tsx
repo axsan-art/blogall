@@ -67,6 +67,28 @@ export default function SearchPosts() {
     publicacion.titulo.toLowerCase().includes(busqueda.toLowerCase())
   );
 
+  async function eliminarPublicacion(id: number) {
+    const confirmar = window.confirm(
+      "¿Estás seguro de que quieres eliminar esta publicación?"
+    );
+
+    if (!confirmar) {
+      return;
+    }
+
+    const { error } = await supabase
+      .from("publicaciones")
+      .delete()
+      .eq("id", id);
+
+    if (error) {
+      console.error("Error al eliminar publicación:", error);
+      return;
+    }
+
+    window.location.reload();
+  }
+
   return (
     <div className="mt-8">
       <button
@@ -103,12 +125,21 @@ export default function SearchPosts() {
             </p>
 
             {publicacion.autor_id === usuarioId && (
-              <button
-                onClick={() => router.push(`/editar/${publicacion.id}`)}
-                className="mt-4 bg-orange-600 hover:bg-orange-700 text-white font-semibold px-4 py-2 rounded-lg"
-              >
-                Editar
-              </button>
+              <div className="mt-4 flex gap-3">
+                <button
+                  onClick={() => router.push(`/editar/${publicacion.id}`)}
+                  className="bg-orange-600 hover:bg-orange-700 text-white font-semibold px-4 py-2 rounded-lg"
+                >
+                  Editar
+                </button>
+
+                <button
+                  onClick={() => eliminarPublicacion(publicacion.id)}
+                  className="bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded-lg"
+                >
+                  Eliminar
+                </button>
+              </div>
             )}
           </article>
         ))}
