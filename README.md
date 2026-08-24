@@ -220,3 +220,7 @@ Cada vez que se realiza un nuevo `push` al repositorio, Netlify puede generar au
 ## Autor
 
 Proyecto académico desarrollado por Axel Sánchez
+
+## Video de presentación
+
+[Ver video de presentación](https://ister-my.sharepoint.com/:v:/g/personal/axel_sanchez_ister_edu_ec/IQAS_jlGJmRUTaADfqKWJC3TAdGvKDUmm9tDO52E2yz8JMY?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=vg9RSj)
