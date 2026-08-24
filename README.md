@@ -10,23 +10,23 @@ BlogAll ofrece un espacio para compartir publicaciones y expresar ideas sin la p
 
 ### Página principal
 
-![Página principal](screenshots/inicio.png)
+![Página principal](screenshots/inicio.PNG)
 
 ### Inicio de sesión
 
-![Inicio de sesión](screenshots/login.png)
+![Inicio de sesión](screenshots/login.PNG)
 
 ### Explorar publicaciones
 
-![Explorar publicaciones](screenshots/explorar.png)
+![Explorar publicaciones](screenshots/explorar.PNG)
 
 ### Crear publicación
 
-![Crear publicación](screenshots/crear.png)
+![Crear publicación](screenshots/crear.PNG)
 
 ### Editar publicación
 
-![Editar publicación](screenshots/editar.png)
+![Editar publicación](screenshots/editar.PNG)
 
 ## Tecnologías utilizadas
 
